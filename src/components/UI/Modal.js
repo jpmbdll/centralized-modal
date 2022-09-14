@@ -22,7 +22,7 @@ const TestModal = () => {
       <p>Some conten ts...</p>
       <p>Some con tentsadas s...</p>
       <p>Some conten ddts...</p>
-      <p>Some con tent s...</p>
+      <p>Some con tent sdsd...</p>
       <p>Some cont ents.sdsada ..</p>
       <p>Some contendsdsts...</p>
     </Modal>
