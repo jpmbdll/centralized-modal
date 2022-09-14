@@ -19,9 +19,9 @@ const TestModal = () => {
       onCancel={handleCancel}
     >
       {bodyProps}
-      <p>Some conten ts...</p>
+      <p>Some conten ddts...</p>
       <p>Some con tent s...</p>
-      <p>Some contents...</p>
+      <p>Some cont ents...</p>
     </Modal>
   );
 };
