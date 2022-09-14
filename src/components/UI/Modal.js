@@ -20,7 +20,7 @@ const TestModal = () => {
     >
       {bodyProps}
       <p>Some conten ts...</p>
-      <p>Some con tents...</p>
+      <p>Some con tent s...</p>
       <p>Some contents...</p>
     </Modal>
   );
