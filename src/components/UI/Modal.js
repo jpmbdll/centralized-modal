@@ -1,38 +1,54 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Modal } from "antd";
+import {
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  ModalCloseButton,
+  Button,
+} from "@chakra-ui/react";
 import { modalActions } from "../../store/modal-slice";
 
-// TODO
-// - Use Chakra UI modal
-// - Implement dynamic button actions
-// - investigate if using react portal to render modal is possible
-// - allign design with partner console
-
-const TestModal = () => {
+const PortalModal = () => {
   const dispatch = useDispatch();
-  const { visible, bodyProps } = useSelector((state) => state.modal);
+  const {
+    visible,
+    bodyProps,
+    actions: actionButtons,
+    actionHandler,
+  } = useSelector((state) => state.modal);
 
-  const handleCancel = () => {
+  const handleClose = () => {
     dispatch(modalActions.hideModal());
   };
 
+  const actions = () => {
+    if (!Boolean(actionButtons)) return null;
+    return actionButtons.map((button, i) => (
+      <Button
+        key={i}
+        colorScheme={button.colorScheme}
+        onClick={() => actionHandler(button.label)}
+      >
+        {button.label}
+      </Button>
+    ));
+  };
+
   return (
-    <Modal
-      title="Basic Modal"
-      visible={visible}
-      onOk={handleCancel}
-      onCancel={handleCancel}
-    >
-      {bodyProps}
-      <p>Some conten ts...</p>
-      <p>Some con tentsadas s...</p>
-      <p>Some conten ddts...</p>
-      <p>Some con tent sdsd...</p>
-      <p>Some cont ents.dasdassdsada ..</p>
-      <p>Some contendsdsts...</p>
+    <Modal isOpen={visible} onClose={handleClose}>
+      <ModalOverlay />
+      <ModalContent>
+        <ModalHeader>Modal Title</ModalHeader>
+        <ModalCloseButton />
+        <ModalBody>{bodyProps}</ModalBody>
+        <ModalFooter>{actions()}</ModalFooter>
+      </ModalContent>
     </Modal>
   );
 };
 
-export default TestModal;
+export default PortalModal;

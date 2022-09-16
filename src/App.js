@@ -1,31 +1,64 @@
-import { Fragment } from "react";
 import { useDispatch } from "react-redux";
 import { modalActions } from "./store/modal-slice";
-import { Button } from "antd";
-
-const Content1 = () => {
-  return <h1>Test modal 1</h1>;
-};
-
-const Content2 = () => {
-  return <h1>Test modal 2</h1>;
-};
+import { Button, Center } from "@chakra-ui/react";
+import { BUTTONS_TYPE } from "./components/UI/ModalSettings";
+import { Content } from "./components/UI/Content";
+import { Content2 } from "./components/UI/Content2";
+import { Content3 } from "./components/UI/Content3";
 
 function App() {
   const dispatch = useDispatch();
 
   const showModalOne = () => {
-    dispatch(modalActions.showModal({ bodyProps: <Content1 /> }));
+    dispatch(
+      modalActions.showModal({
+        bodyProps: <Content />,
+        actions: [BUTTONS_TYPE.SAVE, BUTTONS_TYPE.CANCEL],
+      })
+    );
   };
 
   const showModalTwo = () => {
-    dispatch(modalActions.showModal({ bodyProps: <Content2 /> }));
+    dispatch(
+      modalActions.showModal({
+        //styles, modalProps...
+        bodyProps: <Content2 />,
+        actions: [
+          BUTTONS_TYPE.CREATE,
+          BUTTONS_TYPE.UPDATE,
+          BUTTONS_TYPE.DELETE,
+        ],
+      })
+    );
   };
+
+  const showModalThree = () => {
+    dispatch(
+      modalActions.showModal({
+        //styles, modalProps...
+        bodyProps: <Content3 />,
+        actions: [
+          BUTTONS_TYPE.CREATE,
+          BUTTONS_TYPE.UPDATE,
+          BUTTONS_TYPE.DELETE,
+          BUTTONS_TYPE.CANCEL,
+        ],
+      })
+    );
+  };
+
   return (
-    <Fragment>
-      <Button onClick={showModalOne}>Modal 1</Button>
-      <Button onClick={showModalTwo}>Modal 2</Button>
-    </Fragment>
+    <Center>
+      <Button m={10} onClick={showModalOne} colorScheme="blue">
+        Content
+      </Button>
+      <Button m={10} onClick={showModalTwo} colorScheme="red">
+        Content 2
+      </Button>
+      <Button m={10} onClick={showModalThree} colorScheme="red">
+        Content 3
+      </Button>
+    </Center>
   );
 }
 
